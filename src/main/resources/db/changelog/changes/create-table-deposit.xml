@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+<changeSet id="0020" author="AlekseyGl">
+    <sql>
+        CREATE TABLE public.deposit (
+            id serial4 NOT NULL,
+            client_id int4 NULL,
+            deposit_type varchar(50) NULL,
+            opening_date timestamp NULL,
+            deposit_amount numeric(18, 2) NULL,
+            amount_percents numeric(18, 2) NULL,
+            interest_calculation_date timestamp NULL
+        );
+    </sql>
+</changeSet>
+
+</databaseChangeLog>
