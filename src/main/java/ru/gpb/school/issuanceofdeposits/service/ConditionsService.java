@@ -3,20 +3,21 @@ package ru.gpb.school.issuanceofdeposits.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.gpb.school.issuanceofdeposits.exception.NotFoundException;
-import ru.gpb.school.issuanceofdeposits.model.dto.ClientDTO;
-import ru.gpb.school.issuanceofdeposits.model.dto.ConditionsDTO;
-import ru.gpb.school.issuanceofdeposits.repository.ClientRepositoryArray;
-import ru.gpb.school.issuanceofdeposits.repository.ConditionsRepositoryArray;
+import ru.gpb.school.issuanceofdeposits.model.dto.ConditionsDto;
+import ru.gpb.school.issuanceofdeposits.model.entity.ConditionsEntity;
+import ru.gpb.school.issuanceofdeposits.repository.ConditionsRepository;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ConditionsService {
 
-    private final ConditionsRepositoryArray conditionsRepository;
+    private final ConditionsRepository conditionsRepository;
 
 
 
-    public ConditionsDTO findById(int id) throws NotFoundException {
+    public Optional<ConditionsEntity> findById(int id) throws NotFoundException {
         return conditionsRepository.findById(id);
     }
 

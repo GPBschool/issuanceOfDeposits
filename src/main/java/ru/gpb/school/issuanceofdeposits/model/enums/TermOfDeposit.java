@@ -1,6 +1,6 @@
 package ru.gpb.school.issuanceofdeposits.model.enums;
 
-public enum TermsOfDeposits {
+public enum TermOfDeposit {
     ONE_DAY,
     ONE_WEEK,
     ONE_MONTH,

@@ -4,8 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.gpb.school.issuanceofdeposits.api.request.ClientRequest;
 import ru.gpb.school.issuanceofdeposits.exception.NotFoundException;
-import ru.gpb.school.issuanceofdeposits.model.dto.ClientDTO;
-import ru.gpb.school.issuanceofdeposits.repository.ClientRepositoryArray;
+import ru.gpb.school.issuanceofdeposits.model.dto.ClientDto;
 
 @Service
 @RequiredArgsConstructor
@@ -15,11 +14,11 @@ public class ClientService {
 
 
 
-    public ClientDTO findById(int id) throws NotFoundException {
+    public ClientDto findById(int id) throws NotFoundException {
         return clientRepository.findById(id);
     }
 
-    public ClientDTO findByNameAndBirthdateAndEmail(ClientRequest clientRequest) throws NotFoundException {
+    public ClientDto findByNameAndBirthdateAndEmail(ClientRequest clientRequest) throws NotFoundException {
         return clientRepository.findByNameAndBirthdateAndEmail(clientRequest);
 
     }

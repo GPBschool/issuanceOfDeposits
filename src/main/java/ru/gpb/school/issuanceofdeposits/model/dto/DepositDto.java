@@ -2,19 +2,21 @@ package ru.gpb.school.issuanceofdeposits.model.dto;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
 @Builder
-public class DepositDTO {
+@NoArgsConstructor
+public class DepositDto {
     private int id;
-    private ClientDTO client;   // Клиент
+    private int clientId;   // Клиент
     private String accountNumber; // номер счета депозита
-    private BigDecimal ammountDeposit; // сумма депозита
-    private BigDecimal ammountPercent; // сумма процентов
+    private Double ammountDeposit; // сумма депозита
+    private Double ammountPercent; // сумма процентов
     private LocalDateTime DepositOpeningDate; // дата открытия депозита
     private LocalDateTime dateOfLastPercentCalculation; //дата последнего расчета процентов
-    private ConditionsDTO conditions; // условия депозита
+    private ConditionsDto conditions; // условия депозита
+    private Boolean isClosed;   // закрытый
 }

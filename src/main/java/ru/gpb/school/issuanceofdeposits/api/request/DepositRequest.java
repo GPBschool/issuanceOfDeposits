@@ -9,7 +9,8 @@ import java.math.BigDecimal;
 public class DepositRequest {
     @JsonProperty("client_id")
     private int clientId;   // Клиент
-    private BigDecimal ammountDeposit; // сумма депозита
+    @JsonProperty("ammount_deposit")
+    private Double ammountDeposit; // сумма депозита
     @JsonProperty("conditions_id")
     private int conditionsId; // условия депозита
 }

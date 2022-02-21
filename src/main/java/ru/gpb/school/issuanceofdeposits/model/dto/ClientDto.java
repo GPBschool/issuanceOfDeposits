@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Data
 @Builder
-public class ClientDTO {
+public class ClientDto {
     private int id;
     private String firstName;   // имя
     private String lastName;    // фамилия
