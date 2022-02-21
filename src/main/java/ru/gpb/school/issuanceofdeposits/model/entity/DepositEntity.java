@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+// депозиты
 @Getter
 @Setter
 @NoArgsConstructor

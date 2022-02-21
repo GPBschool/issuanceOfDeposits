@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
+// Запрос на добавление депозита
 @Data
 public class DepositRequest {
     @JsonProperty("client_id")

@@ -1,5 +1,6 @@
 package ru.gpb.school.issuanceofdeposits.model.enums;
 
+// Срок депозита
 public enum TermOfDeposit {
     ONE_DAY,
     ONE_WEEK,

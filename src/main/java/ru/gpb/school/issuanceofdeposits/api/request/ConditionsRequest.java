@@ -1,15 +1,15 @@
-package ru.gpb.school.issuanceofdeposits.model.dto;
+package ru.gpb.school.issuanceofdeposits.api.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.gpb.school.issuanceofdeposits.model.enums.TermOfDeposit;
 
-// Условия депозитов
+// Запрос на добавление Условий депозитов
 @Data
-@Builder
-public class ConditionsDto {
-    private int id;
+@NoArgsConstructor
+public class ConditionsRequest {
     private double percent; // проценты
     private boolean blocked; // блокировка условий
     private boolean replenishment; // возможность поплнения
