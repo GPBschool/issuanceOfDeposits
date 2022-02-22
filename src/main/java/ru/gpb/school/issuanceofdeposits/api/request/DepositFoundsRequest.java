@@ -8,8 +8,8 @@ import lombok.Data;
 public class DepositFoundsRequest {
     @JsonProperty("client_id")
     private int clientId;   // Клиент
-    @JsonProperty("ammount_deposit")
-    private Double ammountDeposit; // сумма пополнения депозита
+    @JsonProperty("amount_deposit")
+    private Double amountDeposit; // сумма пополнения депозита
     @JsonProperty("account_number")
     private String accountNumber; // номер счета депозита
 }

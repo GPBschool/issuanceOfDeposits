@@ -35,9 +35,9 @@ public class DepositService {
         DepositEntity depositEntity = getDepositByAccountNumber(depositFoundsRequest.getAccountNumber());
         permissionCheck(depositEntity);
         externalServices.makeTransver(depositFoundsRequest.getClientId(),
-                "", depositFoundsRequest.getAccountNumber(), depositFoundsRequest.getAmmountDeposit());
+                "", depositFoundsRequest.getAccountNumber(), depositFoundsRequest.getAmountDeposit());
 
-        depositEntity.setAmmountDeposit(depositEntity.getAmmountDeposit() + depositFoundsRequest.getAmmountDeposit());
+        depositEntity.setAmountDeposit(depositEntity.getAmountDeposit() + depositFoundsRequest.getAmountDeposit());
         depositRepository.save(depositEntity);
         return mapperDeposit.depositEntityToDto(depositEntity);
     }
@@ -47,7 +47,7 @@ public class DepositService {
 
         String accountNumber = externalServices.createADepositAccount(depositRequest.getClientId());
         externalServices.makeTransver(depositRequest.getClientId(), "",
-                accountNumber, depositRequest.getAmmountDeposit());
+                accountNumber, depositRequest.getAmountDeposit());
         ConditionsEntity conditionsEntity = conditionsService.findById(depositRequest.getConditionsId());
         DepositEntity depositEntity = mapperDeposit.depositRequestToEntity(depositRequest, accountNumber, conditionsEntity);
         depositRepository.save(depositEntity);
@@ -60,11 +60,10 @@ public class DepositService {
     public DepositDto closeDeposit(String accountNumber) throws NotFoundException, DepositException {
         DepositEntity depositEntity = getDepositByAccountNumber(accountNumber);
         permissionCheck(depositEntity);
-        externalServices.makeTransver(depositEntity.getClientId(),
-                accountNumber, "", depositEntity.getAmmountPercent() + depositEntity.getAmmountDeposit());
-
-        depositEntity.setAmmountDeposit(0.);
-        depositEntity.setAmmountPercent(0.);
+        double amount = depositEntity.getAmountPercent() + depositEntity.getAmountDeposit();
+        externalServices.makeTransver(depositEntity.getClientId(), accountNumber, "", amount);
+        depositEntity.setAmountDeposit(0.);
+        depositEntity.setAmountPercent(0.);
         depositEntity.setIsClosed(true);
         depositRepository.save(depositEntity);
         return mapperDeposit.depositEntityToDto(depositEntity);
@@ -74,9 +73,9 @@ public class DepositService {
     public DepositDto withdrawDeposit(String accountNumber) throws NotFoundException, DepositException {
         DepositEntity depositEntity = getDepositByAccountNumber(accountNumber);
         externalServices.makeTransver(depositEntity.getClientId(),
-                accountNumber, "", depositEntity.getAmmountPercent());
+                accountNumber, "", depositEntity.getAmountPercent());
 
-        depositEntity.setAmmountPercent(0.);
+        depositEntity.setAmountPercent(0.);
         depositRepository.save(depositEntity);
         return mapperDeposit.depositEntityToDto(depositEntity);
     }

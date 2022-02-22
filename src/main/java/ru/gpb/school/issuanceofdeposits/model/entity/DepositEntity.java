@@ -21,10 +21,10 @@ public class DepositEntity {
     private int clientId;   // Клиент
     @Column(name = "accoun_number")
     private String accountNumber; // номер счета депозита
-    @Column(name = "ammount_deposit")
-    private Double ammountDeposit; // сумма депозита
-    @Column(name = "ammount_percent")
-    private Double ammountPercent; // сумма процентов
+    @Column(name = "amount_deposit")
+    private Double amountDeposit; // сумма депозита
+    @Column(name = "amount_percent")
+    private Double amountPercent; // сумма процентов
     @Column(name = "deposit_opening_date")
     private LocalDateTime depositOpeningDate; // дата открытия депозита
     @Column(name = "last_date_of_percent_calculation")

@@ -13,8 +13,8 @@
                 conditions_id                    int4 NULL,
                 accoun_number                    VARCHAR(25),
                 deposit_opening_date             timestamp NULL,
-                ammount_deposit                  float8 NULL,
-                ammount_percent                  float8 NULL,
+                amount_deposit                  float8 NULL,
+                amount_percent                  float8 NULL,
                 last_date_of_percent_calculation timestamp NULL,
                 is_closed                        bool
             );

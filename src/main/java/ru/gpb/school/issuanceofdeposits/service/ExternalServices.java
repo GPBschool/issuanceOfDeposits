@@ -16,7 +16,7 @@ public class ExternalServices {
     }
 
     // обращение к внешнему сервису Tansver для перевода средств
-    public void makeTransver(int clientId,String senderAccount, String recipientAccount, double amount)
+    public void makeTransver(int clientId,String from, String to, double amount)
             throws DepositException {
         if (false){
             throw new DepositException("Error transferring funds to a deposit");
