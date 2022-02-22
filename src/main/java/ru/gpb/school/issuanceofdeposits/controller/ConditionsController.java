@@ -25,15 +25,14 @@ public class ConditionsController {
 
     // получить условеи по id
     @GetMapping("/conditions/{id}")
-    public ResponseEntity<?> getAllConditions(@PathVariable Integer id) throws NotFoundException {
-        return ResponseEntity.ok(conditionsService.findById(id));
+    public ResponseEntity<ConditionsDto> getAllConditions(@PathVariable Integer id) throws NotFoundException {
+        return ResponseEntity.ok(conditionsService.getById(id));
     }
 
     // добавить новое условие для депозита
     @PostMapping("/conditions")
-    public ResponseEntity<?> addConditions(@RequestBody ConditionsRequest conditionsRequest) {
-        conditionsService.addCondition(conditionsRequest);
-        return ResponseEntity.ok(true);
+    public ResponseEntity<ConditionsDto> addConditions(@RequestBody ConditionsRequest conditionsRequest) {
+        return ResponseEntity.ok(conditionsService.addCondition(conditionsRequest));
 
     }
 }

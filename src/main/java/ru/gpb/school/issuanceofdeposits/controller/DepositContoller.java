@@ -29,34 +29,30 @@ public class DepositContoller {
 
     // пополнить депозит
     @PostMapping("/depositfounds")
-    public ResponseEntity<?> depositFounds(@RequestBody DepositFoundsRequest depositFoundsRequest)
+    public ResponseEntity<DepositDto> depositFounds(@RequestBody DepositFoundsRequest depositFoundsRequest)
             throws DepositException, NotFoundException {
-        depositService.depositFounds(depositFoundsRequest);
-        return ResponseEntity.ok("deposit founds");
+        return ResponseEntity.ok(depositService.depositFounds(depositFoundsRequest));
     }
 
     // закрыть депозит
     @PostMapping("/closedeposit")
-    public ResponseEntity<?> closeDeposit(@RequestBody AccountRequest accountRequest)
+    public ResponseEntity<DepositDto> closeDeposit(@RequestBody AccountRequest accountRequest)
             throws NotFoundException, DepositException {
-        depositService.closeDeposit(accountRequest.getAccountNumber());
-        return ResponseEntity.ok("close deposit");
+        return ResponseEntity.ok(depositService.closeDeposit(accountRequest.getAccountNumber()));
     }
 
     // вывести на счет проценты по депозиту
     @PostMapping("/withdrawdeposit")
-    public ResponseEntity<?> withdrawDeposit(@RequestBody AccountRequest accountRequest)
+    public ResponseEntity<DepositDto> withdrawDeposit(@RequestBody AccountRequest accountRequest)
             throws NotFoundException, DepositException {
-        depositService.withdrawDeposit(accountRequest.getAccountNumber());
-        return ResponseEntity.ok("interest transferred");
+        return ResponseEntity.ok(depositService.withdrawDeposit(accountRequest.getAccountNumber()));
     }
 
     // Открытие депозита
     @PostMapping("/opendeposit")
-    public ResponseEntity<?> openDeposit(@RequestBody DepositRequest depositRequest)
+    public ResponseEntity<DepositDto> openDeposit(@RequestBody DepositRequest depositRequest)
             throws NotFoundException, DepositException {
-        DepositDto depositDto = depositService.addDeposit(depositRequest);
-        return ResponseEntity.ok(depositDto);
+        return ResponseEntity.ok(depositService.addDeposit(depositRequest));
     }
 
 }

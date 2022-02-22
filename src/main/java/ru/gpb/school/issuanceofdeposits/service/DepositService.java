@@ -30,7 +30,7 @@ public class DepositService {
     }
 
     // пополнение депозита
-    public void depositFounds(DepositFoundsRequest depositFoundsRequest)
+    public DepositDto depositFounds(DepositFoundsRequest depositFoundsRequest)
             throws DepositException, NotFoundException {
         DepositEntity depositEntity = getDepositByAccountNumber(depositFoundsRequest.getAccountNumber());
         permissionCheck(depositEntity);
@@ -39,6 +39,7 @@ public class DepositService {
 
         depositEntity.setAmmountDeposit(depositEntity.getAmmountDeposit() + depositFoundsRequest.getAmmountDeposit());
         depositRepository.save(depositEntity);
+        return mapperDeposit.depositEntityToDto(depositEntity);
     }
 
     // добавление нового депозита
@@ -56,7 +57,7 @@ public class DepositService {
 
 
     // закрытие депозита
-    public void closeDeposit(String accountNumber) throws NotFoundException, DepositException {
+    public DepositDto closeDeposit(String accountNumber) throws NotFoundException, DepositException {
         DepositEntity depositEntity = getDepositByAccountNumber(accountNumber);
         permissionCheck(depositEntity);
         externalServices.makeTransver(depositEntity.getClientId(),
@@ -66,16 +67,18 @@ public class DepositService {
         depositEntity.setAmmountPercent(0.);
         depositEntity.setIsClosed(true);
         depositRepository.save(depositEntity);
+        return mapperDeposit.depositEntityToDto(depositEntity);
     }
 
     // перевод процентов с депозита
-    public void withdrawDeposit(String accountNumber) throws NotFoundException, DepositException {
+    public DepositDto withdrawDeposit(String accountNumber) throws NotFoundException, DepositException {
         DepositEntity depositEntity = getDepositByAccountNumber(accountNumber);
         externalServices.makeTransver(depositEntity.getClientId(),
                 accountNumber, "", depositEntity.getAmmountPercent());
 
         depositEntity.setAmmountPercent(0.);
         depositRepository.save(depositEntity);
+        return mapperDeposit.depositEntityToDto(depositEntity);
     }
 
     // проверка условий депозита

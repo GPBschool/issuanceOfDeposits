@@ -19,9 +19,14 @@ public class ConditionsService {
     private final ConditionsRepository conditionsRepository;
     private final MapperConditions mapperConditions;
 
-    // получить условие по id
+    // получить условие по id и вернуть Entity
     public ConditionsEntity findById(int id) throws NotFoundException {
         return conditionsRepository.findById(id).orElseThrow(()->new NotFoundException("Not found conditions by id "+id));
+    }
+
+    // получить условие по id и вернуть Dto
+    public ConditionsDto getById(int id) throws NotFoundException {
+        return mapperConditions.conditionsEntityToDto(findById(id));
     }
 
     // получить все условия депозитов
@@ -31,7 +36,8 @@ public class ConditionsService {
     }
 
     // добавить условие для депозитов
-    public void addCondition(ConditionsRequest conditionsRequest){
-        conditionsRepository.save(mapperConditions.conditionsRequestToEntity(conditionsRequest));
+    public ConditionsDto addCondition(ConditionsRequest conditionsRequest){
+        ConditionsEntity conditions =  conditionsRepository.save(mapperConditions.conditionsRequestToEntity(conditionsRequest));
+        return mapperConditions.conditionsEntityToDto(conditions);
     }
 }
