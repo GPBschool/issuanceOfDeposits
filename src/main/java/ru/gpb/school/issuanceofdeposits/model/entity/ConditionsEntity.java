@@ -3,6 +3,7 @@ package ru.gpb.school.issuanceofdeposits.model.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import ru.gpb.school.issuanceofdeposits.model.enums.TermOfDeposit;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Entity
+@ToString
 @Table(name = "conditions")
 public class ConditionsEntity {
     @Id

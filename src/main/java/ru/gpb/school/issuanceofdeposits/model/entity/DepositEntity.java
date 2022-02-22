@@ -3,6 +3,7 @@ package ru.gpb.school.issuanceofdeposits.model.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @Entity
+@ToString
 @Table(name = "deposit")
 public class DepositEntity {
     @Id

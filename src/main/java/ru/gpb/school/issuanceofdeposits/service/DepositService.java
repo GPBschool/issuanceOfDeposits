@@ -12,6 +12,8 @@ import ru.gpb.school.issuanceofdeposits.model.entity.DepositEntity;
 import ru.gpb.school.issuanceofdeposits.model.mapper.MapperDeposit;
 import ru.gpb.school.issuanceofdeposits.repository.DepositRepository;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Service
@@ -59,12 +61,14 @@ public class DepositService {
     // закрытие депозита
     public DepositDto closeDeposit(String accountNumber) throws NotFoundException, DepositException {
         DepositEntity depositEntity = getDepositByAccountNumber(accountNumber);
-        permissionCheck(depositEntity);
-        double amount = depositEntity.getAmountPercent() + depositEntity.getAmountDeposit();
+        depositEntity.setIsClosed(true);
+        depositRepository.save(depositEntity);
+        double amountDeposit = depositEntity.getAmountDeposit();
+        double amountPercent = depositEntity.getAmountPercent();
+        double amount = amountPercent + amountDeposit;
         externalServices.makeTransver(depositEntity.getClientId(), accountNumber, "", amount);
         depositEntity.setAmountDeposit(0.);
         depositEntity.setAmountPercent(0.);
-        depositEntity.setIsClosed(true);
         depositRepository.save(depositEntity);
         return mapperDeposit.depositEntityToDto(depositEntity);
     }
@@ -95,5 +99,25 @@ public class DepositService {
         return depositRepository.findByAccountNumber(accountNumber)
                 .orElseThrow(() -> new NotFoundException("Deposit by account number " +
                         accountNumber + " not found"));
+    }
+
+    // расчет процентов
+    public void calculatePercents(LocalDateTime now) throws NotFoundException, DepositException {
+        Collection<DepositEntity> depositEntities = depositRepository.findDepositEntityByIsClosedFalse();
+        for (DepositEntity depositEntity : depositEntities) {
+            calc(depositEntity, now);
+        }
+    }
+
+    private void calc(DepositEntity depositEntity, LocalDateTime now) throws NotFoundException, DepositException {
+        long intervalInSeconds = depositEntity.getConditions().getTermOfDeposit().getSeconds();
+        long difference = Duration.between(depositEntity.getDateOfLastPercentCalculation(), now).getSeconds() + 1;
+        double currentCalculation = (depositEntity.getConditions().getPercent() * depositEntity.getAmountDeposit()) / 100;
+        depositEntity.setAmountPercent(depositEntity.getAmountPercent() + currentCalculation);
+        depositEntity.setDateOfLastPercentCalculation(now);
+        depositRepository.save(depositEntity);
+        if (difference >= intervalInSeconds) {
+            closeDeposit(depositEntity.getAccountNumber());
+        }
     }
 }

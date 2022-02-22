@@ -14,4 +14,5 @@ public interface DepositRepository extends JpaRepository<DepositEntity, Integer>
 
     Collection<DepositEntity> findDepositEntityByClientIdAndIsClosedFalse(Integer clientId);
 
+    Collection<DepositEntity> findDepositEntityByIsClosedFalse();
 }

@@ -1,18 +1,24 @@
 package ru.gpb.school.issuanceofdeposits.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import ru.gpb.school.issuanceofdeposits.exception.DepositException;
+import ru.gpb.school.issuanceofdeposits.exception.NotFoundException;
 
 import java.time.LocalDateTime;
 
 @Component
+@RequiredArgsConstructor
 public class CalculatePercentsService {
 
-    // расчет процентов по депозиту каждую минуту расчет
-    @Scheduled(cron = "0 0/1 * * * *")
-    public void calculatePercents() {
-        //TODO реализовать расчет процентов
+    private final DepositService depositService;
 
-        System.out.println("Расчет процентов " + LocalDateTime.now());
+    // расчет процентов по депозиту каждую минуту
+    @Scheduled(cron = "0 0/1 * * * *")
+    public void calculatePercents() throws NotFoundException, DepositException {
+        //TODO реализовать расчет процентов
+        depositService.calculatePercents(LocalDateTime.now());
+        //System.out.println("Расчет процентов " + LocalDateTime.now());
     }
 }
