@@ -1,7 +1,6 @@
 package ru.gpb.school.issuanceofdeposits.model.mapper;
 
 import org.springframework.stereotype.Component;
-import ru.gpb.school.issuanceofdeposits.api.request.ConditionsRequest;
 import ru.gpb.school.issuanceofdeposits.model.dto.ConditionsDto;
 import ru.gpb.school.issuanceofdeposits.model.entity.ConditionsEntity;
 
@@ -20,13 +19,13 @@ public class MapperConditions {
                 .build();
     }
 
-    // условие депозита из Запроса добавления  в Entity
-    public ConditionsEntity conditionsRequestToEntity(ConditionsRequest conditionsRequest){
+    // условие депозита из Dto в Entity
+    public ConditionsEntity conditionsDtoToEntity(ConditionsDto conditionsRequest){
         ConditionsEntity conditions = new ConditionsEntity();
-        conditions.setBlocked(conditionsRequest.isBlocked());
+        conditions.setBlocked(conditionsRequest.getBlocked());
         conditions.setPercent(conditionsRequest.getPercent());
-        conditions.setReplenishment(conditionsRequest.isReplenishment());
-        conditions.setWithdrawal(conditionsRequest.isWithdrawal());
+        conditions.setReplenishment(conditionsRequest.getReplenishment());
+        conditions.setWithdrawal(conditionsRequest.getWithdrawal());
         conditions.setTermOfDeposit(conditionsRequest.getTermOfDeposit());
 
         return conditions;

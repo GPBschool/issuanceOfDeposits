@@ -2,7 +2,6 @@ package ru.gpb.school.issuanceofdeposits.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.gpb.school.issuanceofdeposits.api.request.ConditionsRequest;
 import ru.gpb.school.issuanceofdeposits.exception.NotFoundException;
 import ru.gpb.school.issuanceofdeposits.model.dto.ConditionsDto;
 import ru.gpb.school.issuanceofdeposits.model.entity.ConditionsEntity;
@@ -10,7 +9,6 @@ import ru.gpb.school.issuanceofdeposits.model.mapper.MapperConditions;
 import ru.gpb.school.issuanceofdeposits.repository.ConditionsRepository;
 
 import java.util.Collection;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -36,8 +34,8 @@ public class ConditionsService {
     }
 
     // добавить условие для депозитов
-    public ConditionsDto addCondition(ConditionsRequest conditionsRequest){
-        ConditionsEntity conditions =  conditionsRepository.save(mapperConditions.conditionsRequestToEntity(conditionsRequest));
+    public ConditionsDto addCondition(ConditionsDto conditionsDto){
+        ConditionsEntity conditions =  conditionsRepository.save(mapperConditions.conditionsDtoToEntity(conditionsDto));
         return mapperConditions.conditionsEntityToDto(conditions);
     }
 }

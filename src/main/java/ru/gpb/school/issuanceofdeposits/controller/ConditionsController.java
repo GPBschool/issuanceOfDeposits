@@ -1,13 +1,10 @@
 package ru.gpb.school.issuanceofdeposits.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.gpb.school.issuanceofdeposits.api.request.ConditionsRequest;
 import ru.gpb.school.issuanceofdeposits.exception.NotFoundException;
 import ru.gpb.school.issuanceofdeposits.model.dto.ConditionsDto;
-import ru.gpb.school.issuanceofdeposits.model.entity.ConditionsEntity;
 import ru.gpb.school.issuanceofdeposits.service.ConditionsService;
 
 import java.util.Collection;
@@ -31,8 +28,8 @@ public class ConditionsController {
 
     // добавить новое условие для депозита
     @PostMapping("/conditions")
-    public ResponseEntity<ConditionsDto> addConditions(@RequestBody ConditionsRequest conditionsRequest) {
-        return ResponseEntity.ok(conditionsService.addCondition(conditionsRequest));
+    public ResponseEntity<ConditionsDto> addConditions(@RequestBody ConditionsDto conditions) {
+        return ResponseEntity.ok(conditionsService.addCondition(conditions));
 
     }
 }
