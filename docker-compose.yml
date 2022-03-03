@@ -1,26 +1,24 @@
-version: '2'
+version: '3.7'
+
 services:
-  deposit:
-    image: deposit:1.0
+  app:
+    image: 'issuanceofdeposit:latest'
     build:
       context: .
-    container_name: deposit
+    container_name: app
     depends_on:
       - db
-#    hostname: localhost
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/deposits?currentSchema=public
-      - SPRING_DATASIURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/deposits
+      - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
-      - SPRING_JPA_HIBERNATE_DDL-AUTO=create-drop
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     ports:
-      - 8080:8080
+      - "8080:8080"
   db:
-    image: postgres:latest
+    image: 'postgres:13.1-alpine'
     container_name: db
-#    hostname: localhost
-    ports:
-      - 5432:5432
     environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=deposits

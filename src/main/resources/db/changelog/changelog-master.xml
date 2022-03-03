@@ -3,10 +3,10 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
-    <include file="db/changelog/changes/0001__create-table-deposit.xml"/>
-    <include file="db/changelog/changes/0002__create-table-conditions.xml"/>
-    <include file="db/changelog/changes/0003__alter-table-conditions.xml"/>
-    <include file="db/changelog/changes/0004__alter-table-deposit.xml"/>
-    <include file="db/changelog/changes/0005__alter-table-deposit.xml"/>
-    <include file="db/changelog/changes/0006__create-table-history.xml"/>
+<!--    <include file="db/changelog/changes/0001__create-table-deposit.xml"/>-->
+<!--    <include file="db/changelog/changes/0002__create-table-conditions.xml"/>-->
+<!--    <include file="db/changelog/changes/0003__alter-table-conditions.xml"/>-->
+<!--    <include file="db/changelog/changes/0004__alter-table-deposit.xml"/>-->
+<!--    <include file="db/changelog/changes/0005__alter-table-deposit.xml"/>-->
+<!--    <include file="db/changelog/changes/0006__create-table-history.xml"/>-->
 </databaseChangeLog>
