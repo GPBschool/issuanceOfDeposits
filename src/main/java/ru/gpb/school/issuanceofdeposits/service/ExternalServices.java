@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import ru.gpb.school.issuanceofdeposits.exception.DepositException;
 import ru.gpb.school.issuanceofdeposits.exception.NotFoundException;
 
+import java.util.UUID;
+
 @Service
 public class ExternalServices {
 
@@ -12,7 +14,7 @@ public class ExternalServices {
         if (false){
             throw new DepositException("Error creating deposit account");
         }
-        return "11111111111111111111";
+        return UUID.randomUUID().toString().replaceAll("-", "").substring(0,25);
     }
 
     // обращение к внешнему сервису Tansver для перевода средств
