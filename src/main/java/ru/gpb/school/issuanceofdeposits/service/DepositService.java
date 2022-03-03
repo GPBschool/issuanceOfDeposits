@@ -112,7 +112,13 @@ public class DepositService {
     private void calc(DepositEntity depositEntity, LocalDateTime now) throws NotFoundException, DepositException {
         long intervalInSeconds = depositEntity.getConditions().getTermOfDeposit().getSeconds();
         long difference = Duration.between(depositEntity.getDepositOpeningDate(), now).getSeconds() + 1;
-        double currentCalculation = (depositEntity.getConditions().getPercent() * depositEntity.getAmountDeposit()) / 100;
+        double currentCalculation = ((depositEntity.getConditions().getPercent() *
+                depositEntity.getAmountDeposit()) / 100) / 12;
+        if (difference < 60) {
+            currentCalculation = (currentCalculation / 60) * difference;
+        }
+        double tmpPercentAmmount = Math.round(currentCalculation * 100);
+        currentCalculation = tmpPercentAmmount / 100;
         depositEntity.setAmountPercent(depositEntity.getAmountPercent() + currentCalculation);
         depositEntity.setDateOfLastPercentCalculation(now);
         depositRepository.save(depositEntity);
